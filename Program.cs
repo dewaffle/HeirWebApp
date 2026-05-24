@@ -19,6 +19,12 @@ namespace HeirWebApp
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromSeconds(300); // 5 mins
+                options.Cookie.IsEssential = true;
+                options.Cookie.SameSite = SameSiteMode.Strict;
+            });
 
             var app = builder.Build();
 
@@ -39,7 +45,9 @@ namespace HeirWebApp
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
 
             app.MapControllerRoute(
                 name: "default",

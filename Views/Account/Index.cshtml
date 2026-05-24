@@ -15,4 +15,16 @@
             </ul>
         </div>
     </div>
+    <div class="card mt-3">
+        <div class="card-body">
+            <h5 class="card-title">Session Values</h5>
+            <ul>
+                @ViewBag.sessionId
+            </ul>
+            <ul>
+                @ViewBag.sessionUserName
+            </ul>
+        </div>
+    </div>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary mt-3">Back to Home</a>
 </div>

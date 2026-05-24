@@ -147,4 +147,24 @@ public class MembersController : Controller
     {
         return _context.Member.Any(e => e.id == id);
     }
+
+    public async Task<IActionResult> SearchForm()
+    {
+        return View();
+    }
+
+    // Members/ShowSearchFormResult
+    public async Task<IActionResult> ShowSearchFormResult(string SearchMember)
+    {
+        if (_context.Member == null)
+        {
+            return Problem("Entity set 'ApplicationDbContext.Member' is null.");
+        }
+
+        var filteredMembers = await _context.Member
+            .Where(j => j.name.Contains(SearchMember) || j.role.Contains(SearchMember))
+            .ToListAsync();
+
+        return View("Index", filteredMembers);
+    }
 }

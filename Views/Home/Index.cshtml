@@ -1,8 +1,127 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Heir - Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style type="text/css">
+    h2 {
+        color: darkblue;
+        text-shadow: 2px 2px 3px lightgray;
+    }
+
+    .welcomeNote {
+        color: #333333;
+        font-style: italic;
+    }
+
+    a:hover {
+        color: red;
+    }
+</style>
+
+<div class="header">
+    <h1 style="color: darkgreen;">Heir</h1>
+    <p class="welcomeNote">Preserving relationships through a clear and simple structure</p>
+    <p id="loadMessage"></p>
 </div>
+
+<div class="sectionBox">
+    <h2 id="top">Project Idea</h2>
+
+    <p>
+        Heir is a website idea that helps people understand how they are connected
+        within a family, group, or organization. It presents relationships in a
+        structured way so users can easily follow connections and roles.
+    </p>
+
+    <p>
+        The project started from the problem that many family members become less
+        connected over time and may not clearly know how they are related anymore.
+        The same structure can also be useful in companies, teams, and communities.
+    </p>
+
+    <p>Click the image below to open the About Us page.</p>
+
+    <img id="homeImage"
+         src="~/images/heir.jpg"
+         alt="Heir Image"
+         usemap="#heirmap"
+         width="500"
+         height="250"
+         class="mainImage">
+
+    <map name="heirmap">
+        <area shape="rect"
+              coords="0,0,500,250"
+              href="@Url.Action("About", "Home")" alt="About Us"
+              onmouseover="mouseOverMessage()"
+              onmouseout="mouseOutMessage()">
+    </map>
+
+    <p id="dynamicText">Original project message</p>
+    <p id="hoverMessage">Mouse did not hover over the image yet.</p>
+
+    <button onclick="changeHomeContent()">Change Content</button>
+    <br /><br />
+    <button onclick="createList()">Show Dynamic Elements</button>
+
+    <div id="dynamicArea"></div>
+</div>
+
+<div class="sectionBox">
+    <article>
+        <h2>Benefits of Heir</h2>
+        <ul>
+            <li>Shows relationship structure clearly</li>
+            <li>Helps preserve long-term connections</li>
+            <li>Can be used in more than one field</li>
+            <li>Makes information easier to follow</li>
+        </ul>
+    </article>
+</div>
+
+<div class="sectionBox">
+    <section>
+        <h2>Possible Uses</h2>
+        <table border="1" class="tableStyle">
+            <tr>
+                <th>Area</th>
+                <th>Use</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td>Family</td>
+                <td>Show relatives and family branches</td>
+                <td>Family tree</td>
+            </tr>
+            <tr>
+                <td>Company</td>
+                <td>Show departments and reporting lines</td>
+                <td>Organization chart</td>
+            </tr>
+            <tr>
+                <td>Education</td>
+                <td>Show research or student groups</td>
+                <td>Project teams</td>
+            </tr>
+        </table>
+    </section>
+</div>
+
+<div class="sectionBox">
+    <h2>Internal Link Example</h2>
+    <p><a href="#top">Go to the top of this page</a></p>
+</div>
+
+<div class="sectionBox layerArea">
+    <h2>Layering Example</h2>
+    <br /><br /><br /><br /><br /><br /><br /><br />
+    <div class="box1">Background<br />Box</div>
+    <div class="box2">Front Box using z-index</div>
+</div>
+
+<script type="text/javascript">
+    function start() {
+        document.getElementById("loadMessage").innerHTML = "Welcome to Heir Website";
+    }
+    start();
+</script>

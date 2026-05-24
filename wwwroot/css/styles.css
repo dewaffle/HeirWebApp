@@ -1,0 +1,104 @@
+body {
+    background-color: #f2f2f2;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.wrapper {
+    width: 900px;
+    margin: auto;
+    background-color: white;
+    border: 1px solid gray;
+}
+
+.header {
+    background-color: #dff0d8;
+    text-align: center;
+    padding: 20px;
+    border-bottom: 2px solid darkgreen;
+}
+
+.menu {
+    background-color: #eeeeee;
+    text-align: center;
+    padding: 12px;
+    border-bottom: 1px solid gray;
+}
+
+.menu a {
+    text-decoration: none;
+    color: darkblue;
+    font-weight: bold;
+    padding: 8px;
+}
+
+.menu a:hover {
+    color: white;
+    background-color: darkblue;
+}
+
+.sectionBox {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #999999;
+    border-radius: 15px;
+    box-shadow: 3px 3px 8px lightgray;
+    background-color: #fafafa;
+}
+
+.mainImage {
+    border: 2px solid darkgray;
+    border-radius: 10px;
+    box-shadow: 2px 2px 6px gray;
+}
+
+.tableStyle {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tableStyle th {
+    background-color: #cce5ff;
+    padding: 10px;
+}
+
+.tableStyle td {
+    padding: 10px;
+    background-color: #ffffff;
+}
+
+.footer {
+    text-align: center;
+    background-color: #dff0d8;
+    padding: 10px;
+    border-top: 2px solid darkgreen;
+}
+
+.layerArea {
+    position: relative;
+    height: 180px;
+    margin: 5px 5px 5px 5px;
+}
+
+.box1 {
+    position: absolute;
+    top: 80px;
+    left: 30px;
+    width: 250px;
+    height: 90px;
+    background-color: lightblue;
+    border: 1px solid blue;
+    z-index: 1;
+    padding: 20px;
+}
+
+.box2 {
+    position: absolute;
+    top: 90px;
+    left: 120px;
+    width: 250px;
+    height: 90px;
+    background-color: lightyellow;
+    border: 1px solid orange;
+    z-index: 2;
+    padding: 20px;
+}

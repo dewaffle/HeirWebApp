@@ -68,5 +68,10 @@ namespace HeirWebApp.Controllers
             HttpContext.Session.SetString(key, value);
             return RedirectToAction("Index");
         }
+
+        public IActionResult About()
+        {
+            return View();
+        }
     }
 }

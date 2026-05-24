@@ -15,6 +15,18 @@ namespace HeirWebApp.Controllers
 
         public IActionResult Index()
         {
+            // Check if the user is authenticated
+            if (User.Identity.IsAuthenticated)
+            {
+                // User is logged in, get their username
+                SetCookies("userName", User.Identity.Name);
+            }
+            else
+            {
+                // User is not logged in, set a cookie with "Guest"
+                SetCookies("userName", "guest");
+            }
+            SetCookies("browserName", Request.Headers["User-Agent"].ToString());
             return View();
         }
 
@@ -27,6 +39,19 @@ namespace HeirWebApp.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult SetCookies(string cookieName, string cookieValue)
+        {
+            CookieOptions options = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(15),  // Cookie expires in 15 days
+                HttpOnly = true,                     // Prevent JavaScript access to the cookies
+                Secure = true,                       // Use Secure flag (HTTPS only)
+                SameSite = SameSiteMode.Strict       // Prevent CSRF attacks
+            };
+            Response.Cookies.Append(cookieName, cookieValue, options);
+            return Ok("Cookies has been set.");
         }
     }
 }

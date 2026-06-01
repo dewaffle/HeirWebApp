@@ -1,22 +1,276 @@
+/* ===== Heir theme ===== */
+:root {
+    --bg: #f4f2ec; /* warm off-white page background */
+    --surface: #ffffff; /* cards */
+    --text: #2d3338; /* soft charcoal */
+    --muted: #6f7a82; /* secondary text */
+    --border: #e6e2da; /* thin warm-gray lines */
+    --accent: #4a7d78; /* dusty teal */
+    --accent-dark: #3a625e; /* hover */
+    --accent-soft: #eaf1f0; /* light accent tint */
+    --radius: 12px;
+    --shadow: 0 2px 10px rgba(45, 51, 56, 0.06);
+    --maxw: 960px;
+}
+
 html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+    font-size: 15px;
 }
 
 body {
-  margin-bottom: 60px;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.container {
+    max-width: var(--maxw);
+}
+
+h1, h2, h3, h4 {
+    color: var(--text);
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 1.9rem;
+    margin-bottom: .75rem;
+}
+
+h2 {
+    font-size: 1.4rem;
+    margin-bottom: .6rem;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+    a:hover {
+        color: var(--accent-dark);
+        text-decoration: underline;
+    }
+
+p {
+    margin-bottom: .9rem;
+}
+
+.text-muted, .muted {
+    color: var(--muted) !important;
+}
+
+.welcomeNote {
+    color: var(--muted);
+    font-style: italic;
+}
+
+#loadMessage {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* ===== Top nav (single header) ===== */
+.heir-nav {
+    background-color: var(--surface);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    margin-bottom: 1.75rem;
+    padding: .5rem 0;
+}
+
+    .heir-nav .navbar-brand {
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 1.35rem;
+        letter-spacing: .5px;
+    }
+
+    .heir-nav .nav-link {
+        color: var(--text);
+        font-weight: 500;
+        padding: .4rem .85rem;
+        border-radius: 6px;
+    }
+
+        .heir-nav .nav-link:hover {
+            color: var(--accent-dark);
+            background-color: var(--accent-soft);
+            text-decoration: none;
+        }
+
+    .heir-nav .btn-link {
+        color: var(--text);
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+        .heir-nav .btn-link:hover {
+            color: var(--accent-dark);
+        }
+
+/* ===== Cards (sectionBox + bootstrap .card) ===== */
+.sectionBox, .card {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.5rem 1.75rem;
+    margin: 0 0 1.5rem 0; /* vertical spacing only, so left/right edges line up */
+}
+
+.card-body {
+    padding: .5rem .25rem;
+}
+
+.card-title {
+    color: var(--accent);
+    font-size: 1.1rem;
+}
+
+.mainImage {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    max-width: 100%;
+    height: auto;
+}
+
+/* ===== Tables ===== */
+.table, .tableStyle {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0;
+}
+
+    .table th, .tableStyle th {
+        color: var(--accent);
+        text-align: left;
+        font-weight: 600;
+        border-bottom: 2px solid var(--border);
+        padding: .65rem .75rem;
+        background: transparent;
+    }
+
+    .table td, .tableStyle td {
+        border-bottom: 1px solid var(--border);
+        padding: .65rem .75rem;
+        background: transparent;
+    }
+
+/* ===== Buttons ===== */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    padding: .45rem 1.1rem;
+}
+
+.btn-primary {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+    .btn-primary:hover, .btn-primary:focus {
+        background-color: var(--accent-dark);
+        border-color: var(--accent-dark);
+        color: #fff;
+    }
+
+.btn-secondary {
+    background-color: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+}
+
+    .btn-secondary:hover {
+        background-color: var(--accent-soft);
+        color: var(--accent-dark);
+        border-color: var(--accent);
+    }
+
+.btn-danger {
+    background-color: #b4554e;
+    border-color: #b4554e;
+}
+
+    .btn-danger:hover {
+        background-color: #9c443e;
+        border-color: #9c443e;
+    }
+
+/* ===== Forms ===== */
+label, .control-label {
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: .25rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-control {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: .5rem .7rem;
+    background-color: #fbfaf7;
+}
+
+    .form-control:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 .15rem var(--accent-soft);
+        background-color: #fff;
+    }
+
+.text-danger {
+    color: #b4554e !important;
+}
+
+.specialText {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* ===== Layering example (recolored to the palette) ===== */
+.layerArea {
+    position: relative;
+    height: 180px;
+}
+
+.box1 {
+    position: absolute;
+    top: 80px;
+    left: 30px;
+    width: 250px;
+    height: 90px;
+    padding: 18px;
+    background-color: var(--accent-soft);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.box2 {
+    position: absolute;
+    top: 95px;
+    left: 130px;
+    width: 250px;
+    height: 90px;
+    padding: 18px;
+    background-color: var(--accent);
+    color: #fff;
+    border-radius: 8px;
+    z-index: 2;
+}
+
+/* ===== Footer ===== */
+.heir-footer {
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    text-align: center;
+    padding: 1.25rem 0;
+    margin-top: 2rem;
 }

@@ -1,38 +1,20 @@
 ﻿@{
-    ViewData["Title"] = "Heir - Home";
+    ViewData["Title"] = "Home";
 }
 
-<style type="text/css">
-    h2 {
-        color: darkblue;
-        text-shadow: 2px 2px 3px lightgray;
-    }
-
-    .welcomeNote {
-        color: #333333;
-        font-style: italic;
-    }
-
-    a:hover {
-        color: red;
-    }
-</style>
-
-<div class="header">
-    <h1 style="color: darkgreen;">Heir</h1>
+<div class="sectionBox">
+    <h1>Heir</h1>
     <p class="welcomeNote">Preserving relationships through a clear and simple structure</p>
     <p id="loadMessage"></p>
 </div>
 
 <div class="sectionBox">
     <h2 id="top">Project Idea</h2>
-
     <p>
-        Heir is a website idea that helps people understand how they are connected
+        Heir is a website that helps people understand how they are connected
         within a family, group, or organization. It presents relationships in a
         structured way so users can easily follow connections and roles.
     </p>
-
     <p>
         The project started from the problem that many family members become less
         connected over time and may not clearly know how they are related anymore.
@@ -41,29 +23,21 @@
 
     <p>Click the image below to open the About Us page.</p>
 
-    <img id="homeImage"
-         src="~/images/heir.jpg"
-         alt="Heir Image"
-         usemap="#heirmap"
-         width="500"
-         height="250"
-         class="mainImage">
-
+    <img id="homeImage" src="~/images/heir.jpg" alt="Heir Image"
+         usemap="#heirmap" width="500" height="250" class="mainImage" />
     <map name="heirmap">
-        <area shape="rect"
-              coords="0,0,500,250"
+        <area shape="rect" coords="0,0,500,250"
               href="@Url.Action("About", "Home")" alt="About Us"
-              onmouseover="mouseOverMessage()"
-              onmouseout="mouseOutMessage()">
+              onmouseover="mouseOverMessage()" onmouseout="mouseOutMessage()" />
     </map>
 
     <p id="dynamicText">Original project message</p>
     <p id="hoverMessage">Mouse did not hover over the image yet.</p>
 
-    <button onclick="changeHomeContent()">Change Content</button>
-    <br /><br />
-    <button onclick="createList()">Show Dynamic Elements</button>
-
+    <div style="margin-top:.5rem;">
+        <button type="button" class="btn btn-primary" onclick="changeHomeContent()">Change Content</button>
+        <button type="button" class="btn btn-secondary" style="margin-left:.5rem;" onclick="createList()">Show Dynamic Elements</button>
+    </div>
     <div id="dynamicArea"></div>
 </div>
 
@@ -82,27 +56,11 @@
 <div class="sectionBox">
     <section>
         <h2>Possible Uses</h2>
-        <table border="1" class="tableStyle">
-            <tr>
-                <th>Area</th>
-                <th>Use</th>
-                <th>Example</th>
-            </tr>
-            <tr>
-                <td>Family</td>
-                <td>Show relatives and family branches</td>
-                <td>Family tree</td>
-            </tr>
-            <tr>
-                <td>Company</td>
-                <td>Show departments and reporting lines</td>
-                <td>Organization chart</td>
-            </tr>
-            <tr>
-                <td>Education</td>
-                <td>Show research or student groups</td>
-                <td>Project teams</td>
-            </tr>
+        <table class="tableStyle">
+            <tr><th>Area</th><th>Use</th><th>Example</th></tr>
+            <tr><td>Family</td><td>Show relatives and family branches</td><td>Family tree</td></tr>
+            <tr><td>Company</td><td>Show departments and reporting lines</td><td>Organization chart</td></tr>
+            <tr><td>Education</td><td>Show research or student groups</td><td>Project teams</td></tr>
         </table>
     </section>
 </div>

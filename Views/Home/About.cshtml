@@ -1,35 +1,16 @@
 ﻿@{
-    ViewData["Title"] = "Heir - About Us";
+    ViewData["Title"] = "About Us";
 }
-
-<style type="text/css">
-    .specialText {
-        color: purple;
-        font-weight: bold;
-    }
-</style>
-
-<div class="header">
-    <h1>Heir</h1>
-    <p>About Us</p>
-</div>
 
 <div class="sectionBox">
     <article>
         <h2>About the Project</h2>
-
-        <img src="~/images/heir.jpg" alt="Heir Image" usemap="#heirmapabout" width="400" height="200" class="mainImage">
-
-        <map name="heirmapabout">
-            <area shape="rect" coords="0,0,400,200" href="@Url.Action("About", "Home")" alt="About Us">
-        </map>
-
+        <img src="~/images/heir.jpg" alt="Heir Image" width="400" height="200" class="mainImage" />
         <p>
             Heir is a project that focuses on building a structured digital view of
             relationships between people. It helps users understand how individuals
             belong to a family, team, or organization.
         </p>
-
         <p class="specialText">
             The project combines social value with practical organization.
         </p>
@@ -50,23 +31,11 @@
 <div class="sectionBox">
     <section>
         <h2>Team Roles</h2>
-        <table border="1" class="tableStyle">
-            <tr>
-                <th>Role</th>
-                <th>Task</th>
-            </tr>
-            <tr>
-                <td>Designer</td>
-                <td>Create page layout and appearance</td>
-            </tr>
-            <tr>
-                <td>Developer</td>
-                <td>Write HTML and CSS code</td>
-            </tr>
-            <tr>
-                <td>Researcher</td>
-                <td>Explain problem and project benefit</td>
-            </tr>
+        <table class="tableStyle">
+            <tr><th>Role</th><th>Task</th></tr>
+            <tr><td>Designer</td><td>Create page layout and appearance</td></tr>
+            <tr><td>Developer</td><td>Write the ASP.NET, HTML and CSS code</td></tr>
+            <tr><td>Researcher</td><td>Explain problem and project benefit</td></tr>
         </table>
     </section>
 </div>

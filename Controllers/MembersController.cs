@@ -1,6 +1,6 @@
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization; // added: enables the [Authorize] attribute
 using HeirWebApp.Models;
 using HeirWebApp.Data;
 
@@ -13,8 +13,8 @@ public class MembersController : Controller
         _context = context;
     }
 
-    // GET: MEMBERS
-    public async Task<IActionResult> Index()    
+    // GET: MEMBERS  (viewing the list is open to everyone)
+    public async Task<IActionResult> Index()
     {
         return View(await _context.Member.ToListAsync());
     }
@@ -37,15 +37,15 @@ public class MembersController : Controller
         return View(member);
     }
 
-    // GET: MEMBERS/Create
+    // GET: MEMBERS/Create  (only logged-in users, ASP.NET Core Part 2 slide 89)
+    [Authorize]
     public IActionResult Create()
     {
         return View();
     }
 
     // POST: MEMBERS/Create
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+    [Authorize]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind("id,name,role,contact,description,parentId")] Member member)
@@ -60,6 +60,7 @@ public class MembersController : Controller
     }
 
     // GET: MEMBERS/Edit/5
+    [Authorize]
     public async Task<IActionResult> Edit(int? id)
     {
         if (id == null)
@@ -76,8 +77,7 @@ public class MembersController : Controller
     }
 
     // POST: MEMBERS/Edit/5
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+    [Authorize]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int? id, [Bind("id,name,role,contact,description,parentId")] Member member)
@@ -111,6 +111,7 @@ public class MembersController : Controller
     }
 
     // GET: MEMBERS/Delete/5
+    [Authorize]
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null)
@@ -129,6 +130,7 @@ public class MembersController : Controller
     }
 
     // POST: MEMBERS/Delete/5
+    [Authorize]
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int? id)
@@ -148,12 +150,13 @@ public class MembersController : Controller
         return _context.Member.Any(e => e.id == id);
     }
 
-    public async Task<IActionResult> SearchForm()
+    // GET: MEMBERS/SearchForm  (not async: it has no await, which removed the CS1998 warning)
+    public IActionResult SearchForm()
     {
         return View();
     }
 
-    // Members/ShowSearchFormResult
+    // Members/ShowSearchFormResult  (searches by name OR role)
     public async Task<IActionResult> ShowSearchFormResult(string SearchMember)
     {
         if (_context.Member == null)

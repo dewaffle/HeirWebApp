@@ -17,22 +17,25 @@ namespace HeirWebApp.Controllers
         {
             // create a session id
             SetSession("id", Guid.NewGuid().ToString());
-            // Check if the user is authenticated
-            if (User.Identity.IsAuthenticated)
+
+            // Check if the user is authenticated (null-checked to clear the warnings)
+            if (User.Identity != null && User.Identity.IsAuthenticated)
             {
                 // User is logged in, get their username
-                SetCookies("userName", User.Identity.Name);
+                var userName = User.Identity.Name ?? "guest";
+                SetCookies("userName", userName);
                 // create a session with username
-                SetSession("username", User.Identity.Name);
+                SetSession("username", userName);
             }
             else
             {
-                // User is not logged in, set a cookie with "Guest"
+                // User is not logged in, set a cookie with "guest"
                 SetCookies("userName", "guest");
                 // create a session with username
                 SetSession("username", "guest");
             }
-            // Get the broswer type
+
+            // Get the browser type
             SetCookies("broswerName", Request.Headers["User-Agent"].ToString());
 
             return View();

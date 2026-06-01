@@ -36,7 +36,7 @@ namespace HeirWebApp.Controllers
             }
 
             // Get the browser type
-            SetCookies("broswerName", Request.Headers["User-Agent"].ToString());
+            SetCookies("browserName", Request.Headers["User-Agent"].ToString());
 
             return View();
         }

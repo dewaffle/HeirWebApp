@@ -13,31 +13,43 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="id" />
+
             <div class="form-group">
                 <label asp-for="name" class="control-label"></label>
                 <input asp-for="name" class="form-control" />
                 <span asp-validation-for="name" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="role" class="control-label"></label>
                 <input asp-for="role" class="form-control" />
                 <span asp-validation-for="role" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="contact" class="control-label"></label>
                 <input asp-for="contact" class="form-control" />
                 <span asp-validation-for="contact" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="description" class="control-label"></label>
                 <input asp-for="description" class="form-control" />
                 <span asp-validation-for="description" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="parentId" class="control-label"></label>
-                <input asp-for="parentId" class="form-control" />
+                <select asp-for="parentId" class="form-control">
+                    <option value="">— None (top of the tree) —</option>
+                    @foreach (var m in (List<Member>)ViewBag.ParentOptions)
+                    {
+                        <option value="@m.id">@m.name</option>
+                    }
+                </select>
                 <span asp-validation-for="parentId" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

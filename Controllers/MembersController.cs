@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization; // added: enables the [Authorize] attribute
+using Microsoft.AspNetCore.Authorization;
 using HeirWebApp.Models;
 using HeirWebApp.Data;
 
@@ -13,9 +13,35 @@ public class MembersController : Controller
         _context = context;
     }
 
-    // GET: MEMBERS  (viewing the list is open to everyone)
+    // Loads the list of members used to fill the "Parent" dropdown.
+    // excludeId keeps a member from being offered as its own parent (on Edit).
+    private async Task PopulateParentOptions(int? excludeId = null)
+    {
+        ViewBag.ParentOptions = await _context.Member
+            .Where(m => excludeId == null || m.id != excludeId)
+            .OrderBy(m => m.name)
+            .ToListAsync();
+    }
+
+    // Builds an id -> name map of ALL members, so the list can show a parent's
+    // name even when the list is a filtered search result.
+    private async Task PopulateNameLookup()
+    {
+        ViewBag.NameLookup = await _context.Member.ToDictionaryAsync(m => m.id, m => m.name);
+    }
+
+    // Looks up a parent's name for display (returns null if no parent).
+    private async Task<string?> GetParentName(int? parentId)
+    {
+        if (parentId == null) return null;
+        var parent = await _context.Member.FirstOrDefaultAsync(m => m.id == parentId);
+        return parent?.name;
+    }
+
+    // GET: MEMBERS
     public async Task<IActionResult> Index()
     {
+        await PopulateNameLookup();
         return View(await _context.Member.ToListAsync());
     }
 
@@ -34,13 +60,15 @@ public class MembersController : Controller
             return NotFound();
         }
 
+        ViewBag.ParentName = await GetParentName(member.parentId);
         return View(member);
     }
 
-    // GET: MEMBERS/Create  (only logged-in users, ASP.NET Core Part 2 slide 89)
+    // GET: MEMBERS/Create
     [Authorize]
-    public IActionResult Create()
+    public async Task<IActionResult> Create()
     {
+        await PopulateParentOptions();
         return View();
     }
 
@@ -56,6 +84,7 @@ public class MembersController : Controller
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        await PopulateParentOptions();
         return View(member);
     }
 
@@ -73,6 +102,7 @@ public class MembersController : Controller
         {
             return NotFound();
         }
+        await PopulateParentOptions(member.id);
         return View(member);
     }
 
@@ -107,6 +137,7 @@ public class MembersController : Controller
             }
             return RedirectToAction(nameof(Index));
         }
+        await PopulateParentOptions(member.id);
         return View(member);
     }
 
@@ -126,6 +157,7 @@ public class MembersController : Controller
             return NotFound();
         }
 
+        ViewBag.ParentName = await GetParentName(member.parentId);
         return View(member);
     }
 
@@ -150,7 +182,7 @@ public class MembersController : Controller
         return _context.Member.Any(e => e.id == id);
     }
 
-    // GET: MEMBERS/SearchForm  (not async: it has no await, which removed the CS1998 warning)
+    // GET: MEMBERS/SearchForm
     public IActionResult SearchForm()
     {
         return View();
@@ -163,6 +195,8 @@ public class MembersController : Controller
         {
             return Problem("Entity set 'ApplicationDbContext.Member' is null.");
         }
+
+        await PopulateNameLookup();
 
         var filteredMembers = await _context.Member
             .Where(j => j.name.Contains(SearchMember) || j.role.Contains(SearchMember))

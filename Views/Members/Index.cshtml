@@ -45,9 +45,14 @@
             <td>
                 @Html.DisplayFor(model => item.description)
             </td>
-            <td>
-                @Html.DisplayFor(model => item.parentId)
-            </td>
+                <td>
+                    @{
+                        var lookup = (Dictionary<int, string>)ViewBag.NameLookup;
+                        var parentName = item.parentId != null && lookup.ContainsKey(item.parentId.Value)
+                        ? lookup[item.parentId.Value] : "—";
+                    }
+                    @parentName
+                </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.id">Details</a> |

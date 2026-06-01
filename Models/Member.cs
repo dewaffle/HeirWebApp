@@ -6,19 +6,23 @@ namespace HeirWebApp.Models
     {
         public int id { get; set; }
 
-        // = string.Empty removes the "non-nullable property" warnings.
         [Required]
+        [Display(Name = "Name")]
         public string name { get; set; } = string.Empty;
 
         [Required]
+        [Display(Name = "Role")]
         public string role { get; set; } = string.Empty;
 
-        public string? contact { get; set; } = string.Empty;
+        [Display(Name = "Contact")]
+        public string? contact { get; set; }
 
-        public string? description { get; set; } = string.Empty;
+        [Display(Name = "Description")]
+        public string? description { get; set; }
 
         // Self-referencing link for the hierarchy.
         // a null parentId means the member is the root of a tree.
+        [Display(Name = "Parent")]
         public int? parentId { get; set; }
 
         public Member()
